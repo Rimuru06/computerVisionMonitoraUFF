@@ -1,9 +1,0 @@
-postgres==4.0
-psycopg2-binary==2.9.2
-django==3.2.9
-django-crispy-forms==1.13.0
-channels==3.0.4
-channels-redis==3.3.1
-#asgi_redis==1.4.3
-opencv-python==4.5.4.60
-opencv-contrib-python==4.5.4.60

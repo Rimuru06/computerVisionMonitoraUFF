@@ -1,5 +1,0 @@
-setuptools
-websockets
-opencv-python
-scipy
-pysftp
