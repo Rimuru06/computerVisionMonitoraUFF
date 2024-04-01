@@ -1,0 +1,3 @@
+from .alerta_individuo_model import AlertaIndividuo
+from .alerta_individuo_serializer import AlertaIndividuoSerializer
+from .alerta_individuo_view import AlertaIndividuoViewSet

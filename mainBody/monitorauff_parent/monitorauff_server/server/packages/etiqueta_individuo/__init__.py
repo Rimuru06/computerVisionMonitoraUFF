@@ -1,0 +1,3 @@
+from .etiqueta_individuo_model import EtiquetaIndividuo
+from .etiqueta_individuo_serializer import EtiquetaIndividuoSerializer
+from .etiqueta_individuo_view import EtiquetaIndividuoViewSet

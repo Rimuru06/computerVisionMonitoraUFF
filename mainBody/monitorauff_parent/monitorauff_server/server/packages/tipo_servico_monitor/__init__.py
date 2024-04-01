@@ -1,0 +1,1 @@
+from .tipo_servico_monitor_model import TipoServicoMonitor

@@ -1,0 +1,18 @@
+<h1>Default</h1>
+
+<p-table [value]="modelList" styleClass="p-datatable-striped" responsiveLayout="scroll" [rowHover]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-permissao>
+    <tr class="p-selectable-row" (click)="goToDetail(permissao)">
+      <td>{{permissao.nome}}</td>
+      <td>{{permissao.descricao}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-messages></p-messages>

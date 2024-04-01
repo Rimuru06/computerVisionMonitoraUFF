@@ -1,0 +1,43 @@
+<div class="flex flex-row align-items-center">
+  <p-image src="{{getImageUrl()}}" alt="Image" width="100"></p-image>
+  <h1 class="ml-3">{{getNameWithoutExtension(model.img_filename)}}</h1>
+</div>
+
+<p-divider align="center">
+  <h2>Detalhes</h2>
+</p-divider>
+
+<div class="flex flex-1 flex-column">
+  <h3 class="mb-2">Detecção:</h3>
+  <p class="mb-1"><strong>Data: </strong> {{dateToString(model?.criado_em)}} </p>
+  <p class="mb-1">
+    <strong>Monitor: </strong> <a href="./monitor/{{model?.camera_id}}">{{model?.camera_id}}</a>
+  </p>
+</div>
+
+<p-divider align="center">
+  <h2>Indivíduo Associado</h2>
+</p-divider>
+
+<div class="flex flex-1 flex-column">
+  <div *ngIf="individuo; else emptyIndividuo" class="flex flex-1 flex-column">
+    <p><strong>Nome: </strong> {{individuo.nome}}</p>
+  </div>
+
+  <ng-template #emptyIndividuo>
+    <p><strong>Essa face não está associada a um indivíduo</strong></p>
+  </ng-template>
+
+  <h3 class="my-4">Editar associação</h3>
+
+  <p-dropdown [options]="individuoOptions" [(ngModel)]="selectedIndividuo" optionLabel="nome" placeholder="Selecione"
+    [showClear]="true">
+  </p-dropdown>
+
+  <div class="mt-2">
+    <p-button label="Associar" [disabled]="!selectedIndividuo" (onClick)="associarIndividuo()"></p-button>
+    <p-button label="Desassociar" [disabled]="!individuo" (onClick)="desassociarIndividuo()"
+      class="ml-3 p-button-danger p-button-outlined"></p-button>
+  </div>
+
+</div>

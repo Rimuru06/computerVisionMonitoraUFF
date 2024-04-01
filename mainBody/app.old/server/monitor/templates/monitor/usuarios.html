@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+{% block title %}Usuários{% endblock %}
+
+{% block content %}
+<main class="admin">
+    <h1>Usuários cadastrados</h1>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+    <div class="alerta">
+        <div class=""> 
+            <table class="js-dynamitable table table-bordered" id="tablelayer">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Matrícula</th>
+                        <th>Função</th>
+                        <th>Status</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for usuario in user_list %}
+                                <td>{{ usuario.name }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.matricula }}</td>
+                                <td>{{ usuario.tipoUser }}</td>
+                                <td>{{ usuario.status }}</td>
+                                <td><a class="" href="{% url 'monitor:update_user' usuario.id %}"><img class="editar" src="{% static 'images/editar.png' %}"></a></td>
+                                <td><a class="" href="{% url 'monitor:delete_user' usuario.id %}"><img class="del" src="{% static 'images/del.png' %}"></a></td>
+                                </tr>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock %}

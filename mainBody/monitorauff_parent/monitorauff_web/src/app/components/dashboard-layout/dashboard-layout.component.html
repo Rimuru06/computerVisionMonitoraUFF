@@ -1,0 +1,13 @@
+<div class="grid text-900 h-screen w-screen m-0">
+  <aside class="col-2 h-full surface-overlay p-0">
+    <a href="/" class="no-underline">
+      <h1 class="my-2 text-center text-primary">MONITORA UFF</h1>
+    </a>
+    <p-menu [model]="items" styleClass="w-full h-full font-bold surface-card border-none"></p-menu>
+  </aside>
+  <main class="col-10 h-full overflow-y-scroll">
+    <div class="h-full w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

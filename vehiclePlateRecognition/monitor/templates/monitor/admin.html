@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+{% block title %}Administração{% endblock %}
+
+{% block content %}
+<main class="admin">
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+
+    <div class="layer">
+        <h1>Campi</h1>
+        <p><a class="" href="{% url 'monitor:add_layer' %}">+ Adicionar</a></p>
+        
+        <table class="js-dynamitable table table-bordered" id="tablelayer">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for layer in layer_list %}
+                            <td>{{ layer.name }}</td>
+                            <td>{{ layer.status }}</td>
+                            <td><a class="" href="{% url 'monitor:update_layer' layer.id %}"><img class="editar" src="{% static 'images/editar.png' %}"></a></td>
+                            <td><a class="" href="{% url 'monitor:delete_layer' layer.id %}"><img class="del" src="{% static 'images/del.png' %}"></a></td>
+                            </tr>
+                    {% endfor %}</tr>
+            </tbody>
+        </table>        
+    </div>
+
+    <div class="controlPoint">
+        <h1>Pontos de controle</h1>
+        <p><a class="" href="{% url 'monitor:add_controlpoint' %}">+ Adicionar</a></p>
+        <div class="table-responsive"> 
+            <table class="js-dynamitable table table-bordered" id="tablecontrolpoint">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Address</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Layer</th>
+                        <th>Status</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for controlpoint in controlpoint_list %}
+                                <td>{{ controlpoint.name }}</td>
+                                <td>{{ controlpoint.address }}</td>
+                                <td>{{ controlpoint.latitude }}</td>
+                                <td>{{ controlpoint.longitude }}</td>
+                                <td>{{ controlpoint.layer }}</td>
+                                <td>{{ controlpoint.status }}</td>
+                                <td><a class="" href="{% url 'monitor:update_controlpoint' controlpoint.id %}"><img class="editar" src="{% static 'images/editar.png' %}"></a></td>
+                                <td><a class="" href="{% url 'monitor:delete_controlpoint' controlpoint.id %}"><img class="del" src="{% static 'images/del.png' %}"></a></td>
+                                </tr>
+                        {% endfor %}</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="cam">
+        <h1>Agentes</h1>
+        <p><a class="" href="{% url 'monitor:add_camera' %}">+ Adicionar</a></p>
+        <div class="table-responsive"> 
+            <table class="js-dynamitable table table-bordered" id="tablecam">
+                <thead>
+                    <tr>
+                        <th>tag_slug</th>
+                        <th>Direção</th>
+                        <th>Modelo</th>
+                        <th>rtsp_url</th>
+                        <th>agent_user</th>
+                        <th>agent_server</th>
+                        <th>controlpoint</th>
+                        <th>Status</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for camera in camera_list %}
+                                <td>{{ camera.tag_slug }}</td>
+                                <td>{{ camera.direction }}</td>
+                                <td>{{ camera.model }}</td>
+                                <td>{{ camera.rtsp_url }}</td>
+                                <td>{{ camera.agent_user }}</td>
+                                <td>{{ camera.agent_server }}</td>
+                                <td>{{ camera.controlpoint }}</td>
+                                <td>{{ camera.status }}</td>
+                                <td><a class="" href="{% url 'monitor:update_camera' camera.id %}"><img class="editar" src="{% static 'images/editar.png' %}"></a></td>
+                                <td><a class="" href="{% url 'monitor:delete_camera' camera.id %}"><img class="del" src="{% static 'images/del.png' %}"></a></td>
+                                </tr>
+                        {% endfor %}</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}

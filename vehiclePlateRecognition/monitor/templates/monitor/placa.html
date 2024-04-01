@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+{% block title %}Monitora UFF{% endblock %}
+{% block style %}
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="placaView">
+
+    <div class="infoVeiculo">
+
+        <div class="veiculo">
+            <img class=imgVeiculo src="/static/img_veiculos/{{ placa.img_filename }}">
+        </div>
+        
+        <div class='tabelaVeiculo'>
+            <table class="js-dynamitable table table-bordered" id = 'infoCar'>
+                <tbody>
+                    <tr>
+                        <th>Marca</th>
+                        <td>{{ veiculo.marca }}</td>
+                    </tr>
+                    <tr>
+                        <th>Modelo</th>
+                        <td>{{ veiculo.modelo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Placa</th>
+                        <td>{{ placa.license_plate }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ano</th>
+                        <td>{{ veiculo.ano }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cor</th>
+                        <td>{{ veiculo.cor }}</td>
+                    </tr>
+                </tbody>        
+            </table>
+        </div>  
+             
+    </div>
+    
+    <div class="info-veiculo">
+        <div class="table-responsive"> 
+            <table class="js-dynamitable table table-bordered" id="tablesorter">
+                <thead>
+                    <tr>
+                        <th>
+                            Campi
+                            <a href="?order_by=campi"><span class="js-sorter-desc glyphicon glyphicon-chevron-down pull-right"></span></a>
+                            <a href="?order_by=-campi"><span class="js-sorter-asc glyphicon glyphicon-chevron-up pull-right"></span></a>
+                        </th>
+                        <th>
+                            Endereço
+                            <a href="?order_by=endereco"><span class="js-sorter-desc glyphicon glyphicon-chevron-down pull-right"></span></a>
+                            <a href="?order_by=-endereco"><span class="js-sorter-asc glyphicon glyphicon-chevron-up pull-right"></span></a>
+                        </th>
+                        <th>
+                            Direção
+                            <a href="?order_by=direcao"><span class="js-sorter-desc glyphicon glyphicon-chevron-down pull-right"></span></a> 
+                            <a href="?order_by=-direcao"><span class="js-sorter-asc glyphicon glyphicon-chevron-up pull-right"></span></a>
+                        </th>
+                        <th>
+                            Data e hora
+                            <a href="?order_by=data"><span class="js-sorter-desc glyphicon glyphicon-chevron-down pull-right"></span></a>
+                            <a href="?order_by=-data"><span class="js-sorter-asc glyphicon glyphicon-chevron-up pull-right"></span></a>
+                        </th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for placa in placa_list %}
+                                <td>{{ placa.layer }}</td>
+                                <td>{{ placa.address }}</td>
+                                <td>{{ placa.direction }}</td>
+                                <td>{{ placa.detection_date }}</td>
+                                </tr>
+                        {% endfor %}</tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    
+</main>
+
+{% endblock %}

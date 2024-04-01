@@ -1,0 +1,31 @@
+<h1 class="mb-5">Indivíduos</h1>
+
+<p-fileUpload #fileUploader name="file" accept="image/*" [customUpload]="true" (uploadHandler)="onFiltering($event)"
+  chooseLabel="Escolher" uploadLabel="Carregar" cancelLabel="Cancelar">
+  <ng-template pTemplate="toolbar">
+    <p-button label="Limpar Filtro" icon="pi pi-refresh" [disabled]="!filtered" (onClick)="clearFilter()"></p-button>
+  </ng-template>
+</p-fileUpload>
+
+<br>
+
+<p-table [value]="modelList" styleClass="p-datatable-striped" responsiveLayout="scroll" [rowHover]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-individuo>
+    <tr class="p-selectable-row" (click)="goToDetail(individuo)">
+      <td>
+        {{individuo.nome}}
+        <div class="mt-2 mx-0">
+          <p-chip styleClass="mr-1 text-xs" *ngFor="let etiqueta of getEtiquetas(individuo)" [label]="etiqueta.nome">
+          </p-chip>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-messages></p-messages>

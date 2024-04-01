@@ -1,0 +1,16 @@
+<h1 class="mb-5">Monitores</h1>
+
+<p-table [value]="modelList" styleClass="p-datatable-striped" responsiveLayout="scroll" [rowHover]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-monitor>
+    <tr class="p-selectable-row" (click)="goToDetail(monitor)">
+      <td>{{monitor.name}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-messages></p-messages>

@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+
+  muff_server:
+    container_name: muff_server
+    build: .
+    depends_on:
+      - database
+      - zoneminder
+    restart: unless-stopped
+    ports:
+      - ${SSH_PORT}:22
+      - ${DJANGO_PORT}:8000
+      - ${REDIS_PORT}:6379
+    privileged: true
+    shm_size: 512M
+    env_file:
+      - .env
+    volumes:
+      - ${PATH_SERVER}:/usr/src/monitorauff/server
+      - ${PATH_SSH}:/root/.ssh
+    networks:
+      monitorauff_network:
+        ipv4_address: ${MUFF_SERVER_IP}
+
+  database:
+    container_name: database
+    image: postgres:14
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      monitorauff_network:
+        ipv4_address: ${DATABASE_IP}
+    env_file:
+      - .env
+    volumes:
+      - ${PATH_POSTGRES_DATA}:/var/lib/postgresql/data
+      #- ../database/scripts:/scripts
+      #- ../database/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  zoneminder:
+    container_name: zoneminder
+    image: zoneminderhq/zoneminder:latest-ubuntu18.04
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${ZONEMINDER_PORT}:80
+    privileged: true
+    shm_size: 512M
+    volumes:
+      - ${PATH_ZONEMINDER_EVENTS}:/var/cache/zoneminder/events
+      - ${PATH_ZONEMINDER_IMAGES}:/var/cache/zoneminder/images
+      - ${PATH_ZONEMINDER_MYSQL}:/var/lib/mysql
+      - ${PATH_ZONEMINDER_LOGS}:/var/log/zoneminder
+    networks:
+      monitorauff_network:
+        ipv4_address: ${ZONEMINDER_IP}
+
+volumes:
+  events:
+  images:
+  mysql:
+  logs:
+
+networks:
+  monitorauff_network:
+    external: true
+    name: monitorauff_network

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+    client:
+        container_name: client
+        build: .
+        restart: unless-stopped
+        ports:
+            - ${SSH_PORT}:22
+        privileged: true
+        shm_size: 2048M
+        env_file:
+            - .env
+        networks:
+            monitorauff_network:
+                ipv4_address: ${CLIENT_IP}
+
+        volumes:
+            - ${PATH_CLIENT}:/monitorauff/app/client
+
+networks:
+    monitorauff_network:
+        external:
+            name: monitorauff_network

@@ -1,0 +1,4 @@
+from .servico_deteccao_face_model import ServicoDeteccaoFace
+from .servico_deteccao_face_serializer import ServicoDeteccaoFaceSerializer
+from .servico_deteccao_face_view import ServicoDeteccaoFaceViewSet
+from .servico_deteccao_face_service import ServicoDeteccaoFaceService

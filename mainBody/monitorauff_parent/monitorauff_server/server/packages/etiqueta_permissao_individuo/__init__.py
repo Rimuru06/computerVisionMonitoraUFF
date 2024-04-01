@@ -1,0 +1,1 @@
+from .etiqueta_permissao_individuo_model import EtiquetaPermissaoIndividuo

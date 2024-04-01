@@ -1,0 +1,4 @@
+from .permissao_individuo_model import PermissaoIndividuo
+from .permissao_individuo_serializer import PermissaoIndividuoSerializer
+from .permissao_individuo_view import PermissaoIndividuoViewSet
+from . import permissao_individuo_queries

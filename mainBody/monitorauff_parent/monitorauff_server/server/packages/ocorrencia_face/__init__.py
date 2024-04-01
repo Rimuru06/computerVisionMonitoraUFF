@@ -1,0 +1,4 @@
+from .ocorrencia_face_model import OcorrenciaFace
+from .ocorrencia_face_serializer import OcorrenciaFaceSerializer
+from .ocorrencia_face_view import OcorrenciaFaceViewSet
+from .ocorrencia_face_service import OcorrenciaFaceService

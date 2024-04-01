@@ -1,0 +1,1 @@
+from .permissao_individuo_grupo_model import PermissaoIndividuoGrupo

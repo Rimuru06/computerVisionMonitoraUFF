@@ -1,0 +1,9 @@
+1. Repositório criado por Thiago Aragão, Abril de 2024.
+
+2. Este respositório tem a intenção de representar todo o projeto mais completo de visão computacional presente no MonitoraUFF. Ele é construído usando arquitetura de microsserviços.
+
+3. Em sua criação dois repositórios já estavam criados.
+
+3.1. O respositório license-plate, do ex-aluno Gleison, foi passado para a pasta vehiclePlateRecognition, e será modificado para adaptar para o projeto. Este deve representar o serviço de reconhecimento de placas de veículos.
+
+3.2. O respositório tcc-christian-correa, do ex-aluno Christopher Correa, foi passado para a pasta mainBody. Este representa a estrutura principal que irá controlar os serviços de reconhecimento.

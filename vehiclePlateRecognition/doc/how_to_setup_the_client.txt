@@ -1,0 +1,70 @@
+Este documento apresenta as instruções necessárias para configurar o cliente responsável
+por processar as imagens capturadas e enviar os resultados para armazenamento. O cliente,
+neste caso, representa um agente que se conecta a uma câmera via RTSP e ao servidor da
+aplicação web da Cerca Inteligente.
+
+As instruções assumem sistema operacional Ubuntu 14 ou superior.
+
+O acesso às seguintes portas deve ser garantido pelo firewall:
+
+  SSH   : Porta 22 
+  RTSP  : Todas as portas utilizadas pelas câmeras atendidas por essa máquina
+
+Os seguintes pacotes devem estar instalados no sistema operacional. É aconselhável executar
+o comando
+
+  $ sudo apt-get update
+  
+antes de prosseguir com as instalações. De modo geral, espera-se que os comandos apresentados
+abaixo de cada pacote devem ser suficientes. Entretanto, é aconselhada a verificação junto ao
+site do desenvolvedor de cada pacote sobre eventuais modificações no processo de instalação:
+
+  Python 3.4 ou superior (https://www.python.org/)
+  
+    $ sudo apt-get install python3
+    
+  PostgreSQL (https://www.postgresql.org/)
+  
+    $ sudo apt-get install python3-psycopg2
+  
+Execute os seguintes comandos para instalar os módulos Python requeridos e suas dependências: 
+
+  $ sudo pip3 install websockets
+
+Instale a OpenCV library conforme as instruções apresentadas em:
+
+  https://www.pyimagesearch.com/2015/07/20/install-opencv-3-0-and-python-3-4-on-ubuntu/
+  https://vitux.com/opencv_ubuntu/
+  pip install opencv-python
+
+Instale a Automatic License Plate Recognition library conforme as instruções apresentadas em:
+(Instalar Tesseract: https://medium.com/quantrium-tech/installing-tesseract-4-on-ubuntu-18-04-b6fcd0cbd78f)
+
+  The Easy Way (Ubuntu 14.04+)
+    https://github.com/openalpr/openalpr
+    
+incluindo a seguinte opção ao executar o CMake:
+
+    $ cmake -DWITH_GPU_DETECTOR=ON [outras opções] ..
+    
+Vá para a pasta 'openalpr/src/bindings/python/' e execute
+
+  $ sudo python3 setup.py install
+
+O cliente é iniciado remotamente pelo servidor responsável por manter a aplicação web da
+Cerca Inteligente. Portanto, é necessário instalar uma chave pública de autenticação SSH
+para que o servidor web conecte na máquina que executa o cliente (agente). Para isso,
+execute os seguintes comandos na máquina do servidor web:
+
+  $ ssh-keygen -t rsa
+  $ scp ~/.ssh/id_rsa.pub <username>@<ip da máquina onde o agente rodará>:
+  
+Só é preciso executar o primeiro comando uma vez, pois a mesma chave pode ser utilizada
+(e copiada) para todas as máquinas responsáveis por manter agentes.
+
+Execute os seguintes comandos na máquina cliente:
+
+  $ mkdir -p ~/.ssh
+  $ touch ~/.ssh/authorized_keys
+  $ cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
+  $ rm ~/id_rsa.pub

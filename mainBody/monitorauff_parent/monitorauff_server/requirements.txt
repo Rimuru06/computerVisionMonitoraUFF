@@ -1,0 +1,15 @@
+asgiref==3.5.0
+channels==3.0.4
+Django==4.0.2
+django-environ==0.8.1
+djangorestframework==3.13.1
+environ==1.0
+opencv-python
+opencv-contrib-python
+opencv-python-headless
+postgres==4.0
+pyzm==0.3.56
+requests==2.27.1
+django-filter
+Pillow==9.1.0
+django-cors-headers

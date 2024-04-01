@@ -1,0 +1,1 @@
+from .individuo_etiquetado_model import IndividuoEtiquetado
